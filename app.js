@@ -3,11 +3,14 @@ const content = document.querySelector('.content')
 const img = document.querySelector('.container img')
 const url = 'https://api.chucknorris.io/jokes/random'
 
-button.addEventListener('click', () => {
-  fetch(url)
-    .then((res) => res.json())
-    .then((text) => displayData(text))
-    .catch((err) => console.log(err))
+button.addEventListener('click', async () => {
+  try {
+    const res = await fetch(url)
+    const data = await res.json()
+    displayData(data)
+  } catch (error) {
+    console.log(error)
+  }
 })
 
 function displayData({ value: joke }) {
